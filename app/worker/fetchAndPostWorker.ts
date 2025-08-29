@@ -10,7 +10,6 @@ interface WorkerMessage {
     error?: string
 }
 
-
 self.onmessage = async (e: MessageEvent<WorkerMessage>) => {
     const {type, data} = e.data;
 

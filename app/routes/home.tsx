@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { TodoApp } from "./interface";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,6 +9,18 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+});
+
 export default function Home() {
-  return <Welcome />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TodoApp/>
+    </QueryClientProvider>
+  );
 }
